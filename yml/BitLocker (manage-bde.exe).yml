@@ -1,0 +1,40 @@
+Name: manage-bde.exe
+Description: Manage-bde.exe is a command-line tool used to configure BitLocker Drive Encryption. Attackers can misuse it to encrypt drives, lock drives, or extract encryption keys, effectively turning BitLocker into ransomware.
+Aliases:
+Author: Omar Zayed
+Created: 2024-12-04
+Commands:
+  - Command: manage-bde.exe -lock C:
+    Description: Locks the C: drive.
+    Usecase: An attacker can lock the system drive to cause a denial of service or demand a ransom for decryption.
+    Category: Impact
+    Privileges: Administrator
+    MitreID: T1486
+    OperatingSystem: Windows 10 All, Windows 11 All
+  - Command: manage-bde.exe -protectors -delete C: -type RecoveryPassword
+    Description: Deletes all recovery passwords for the C: drive.
+    Usecase: An attacker can prevent recovery of the encrypted drive by deleting recovery keys.
+    Category: Defense Evasion
+    Privileges: Administrator
+    MitreID: T1531
+    OperatingSystem: Windows 10 All, Windows 11 All
+  - Command: manage-bde.exe -on C: -RecoveryPassword
+    Description: Enables BitLocker encryption on the C: drive with a recovery password.
+    Usecase: An attacker can enable BitLocker encryption with a known password to encrypt the drive.
+    Category: Impact
+    Privileges: Administrator
+    MitreID: T1486
+    OperatingSystem: Windows 10 All, Windows 11 All
+Full_Path:
+  - Path: c:\windows\system32\manage-bde.exe
+Code_Sample:
+Detection:
+  - IOC: Execution of manage-bde.exe with encryption or locking parameters
+  - IOC: Deletion of BitLocker recovery keys
+  - IOC: Unexpected BitLocker encryption activities
+Resources:
+  - Link: https://attack.mitre.org/techniques/T1486/
+  - Link: https://github.com/omartarekzayed
+Acknowledgement:
+  - Person: Omar Zayed
+    Handle: '@omartarekzayed'
