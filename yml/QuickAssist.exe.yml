@@ -1,0 +1,26 @@
+Name: QuickAssist.exe
+Description: Quick Assist is a remote assistance tool included in Windows 10 and later. Attackers can exploit it to gain remote control over a victim's machine under the guise of providing support, potentially bypassing security controls.
+Aliases:
+Author: Omar Zayed
+Created: 2024-12-04
+Commands:
+  - Command: QuickAssist.exe
+    Description: Launches Quick Assist to establish a remote session.
+    Usecase: An attacker can initiate a remote session to control the victim's machine after social engineering the victim to accept the connection.
+    Category: Remote Execution
+    Privileges: User
+    MitreID: T1569.002
+    OperatingSystem: Windows 10 All, Windows 11 All
+Full_Path:
+  - Path: c:\windows\system32\quickassist.exe
+Code_Sample:
+Detection:
+  - IOC: Execution of QuickAssist.exe outside of normal IT support hours
+  - IOC: Unusual outbound connections initiated by Quick Assist
+  - IOC: High volume of spam emails or messages preceding Quick Assist usage
+Resources:
+  - Link: https://attack.mitre.org/techniques/T1569/002/
+  - Link: https://github.com/omartarekzayed
+Acknowledgement:
+  - Person: Omar Zayed
+    Handle: '@omartarekzayed'
